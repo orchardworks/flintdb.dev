@@ -3,7 +3,6 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
-    paths: ["flintdb.dev/**"]
   workflow_dispatch:
 
 permissions:
@@ -12,12 +11,8 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages-lp
+  group: pages
   cancel-in-progress: true
-
-defaults:
-  run:
-    working-directory: flintdb.dev
 
 jobs:
   build:
@@ -31,7 +26,7 @@ jobs:
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: flintdb.dev/dist
+          path: dist
 
   deploy:
     needs: build
