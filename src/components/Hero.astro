@@ -1,0 +1,113 @@
+---
+---
+
+<section class="relative overflow-hidden px-6 pt-32 pb-20 lg:pb-28">
+  <!-- Ambient glow -->
+  <div
+    class="pointer-events-none absolute top-16 left-1/4 -translate-x-1/2 w-[600px] h-[400px] rounded-full bg-flint-500/10 blur-[120px]"
+    aria-hidden="true"
+  ></div>
+
+  <div class="relative mx-auto max-w-7xl lg:grid lg:grid-cols-2 lg:gap-16 xl:gap-24 items-center">
+    <!-- ───── Left: Text ───── -->
+    <div class="max-w-xl">
+      <h1 class="text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
+        The local database that should have existed.
+      </h1>
+
+      <p class="mt-6 text-lg leading-relaxed text-zinc-400 sm:text-xl">
+        Store JSON, query it, analyze it&nbsp;&mdash; all in-engine. No daemon, no schema, no ETL. Just <code class="font-mono text-zinc-200">npm&nbsp;install</code>.
+      </p>
+
+      <!-- CTAs -->
+      <div class="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
+        <!-- Install command box -->
+        <div
+          class="group flex items-center gap-3 rounded-lg border border-surface-600 bg-surface-800 px-5 py-3 font-mono text-sm text-zinc-100 select-all"
+        >
+          <span class="text-zinc-500">$</span>
+          <span id="install-cmd">npm install flintdb</span>
+          <button
+            id="copy-btn"
+            type="button"
+            class="ml-auto shrink-0 cursor-pointer rounded p-1 text-zinc-400 transition hover:text-flint-400"
+            aria-label="Copy install command"
+          >
+            <!-- Clipboard icon -->
+            <svg id="icon-clipboard" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <!-- Check icon (hidden by default) -->
+            <svg id="icon-check" xmlns="http://www.w3.org/2000/svg" class="hidden h-4 w-4 text-green-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Docs link -->
+        <a
+          href="https://docs.flintdb.dev"
+          class="inline-flex items-center justify-center gap-1 rounded-lg border border-zinc-500 px-5 py-3 text-sm font-medium text-zinc-200 transition hover:border-flint-500 hover:text-white"
+        >
+          Read the Docs&nbsp;&rarr;
+        </a>
+      </div>
+    </div>
+
+    <!-- ───── Right: Code example ───── -->
+    <div class="mt-14 lg:mt-0">
+      <div class="rounded-xl border border-surface-700 bg-surface-800 shadow-2xl">
+        <!-- Window chrome -->
+        <div class="flex items-center gap-2 border-b border-surface-700 px-4 py-3">
+          <span class="h-3 w-3 rounded-full bg-surface-600"></span>
+          <span class="h-3 w-3 rounded-full bg-surface-600"></span>
+          <span class="h-3 w-3 rounded-full bg-surface-600"></span>
+          <span class="ml-3 text-xs text-zinc-500 font-mono">demo.ts</span>
+        </div>
+
+        <pre class="overflow-x-auto p-6 text-[13px] leading-relaxed font-mono sm:text-sm"><code><span class="text-purple-400">import</span> <span class="text-zinc-500">{</span> <span class="text-zinc-300">FlintDB</span> <span class="text-zinc-500">}</span> <span class="text-purple-400">from</span> <span class="text-flint-400">"flintdb"</span><span class="text-zinc-500">;</span>
+<!--  -->
+<span class="text-purple-400">const</span> <span class="text-zinc-300">db</span> <span class="text-zinc-500">=</span> <span class="text-zinc-300">FlintDB</span><span class="text-zinc-500">.</span><span class="text-blue-400">open</span><span class="text-zinc-500">(</span><span class="text-flint-400">"./mydata"</span><span class="text-zinc-500">);</span>
+<!--  -->
+<span class="text-zinc-300">db</span><span class="text-zinc-500">.</span><span class="text-blue-400">put</span><span class="text-zinc-500">(</span><span class="text-flint-400">"stocks"</span><span class="text-zinc-500">,</span> <span class="text-zinc-500">{</span>
+  <span class="text-zinc-300">ticker</span><span class="text-zinc-500">:</span> <span class="text-flint-400">"AAPL"</span><span class="text-zinc-500">,</span>
+  <span class="text-zinc-300">close</span><span class="text-zinc-500">:</span> <span class="text-cyan-400">195.5</span><span class="text-zinc-500">,</span>
+  <span class="text-zinc-300">volume</span><span class="text-zinc-500">:</span> <span class="text-cyan-400">5400000</span><span class="text-zinc-500">,</span>
+<span class="text-zinc-500">});</span>
+<!--  -->
+<span class="text-purple-400">const</span> <span class="text-zinc-300">result</span> <span class="text-zinc-500">=</span> <span class="text-zinc-300">db</span><span class="text-zinc-500">.</span><span class="text-blue-400">query</span><span class="text-zinc-500">({</span>
+  <span class="text-zinc-300">from</span><span class="text-zinc-500">:</span> <span class="text-flint-400">"stocks"</span><span class="text-zinc-500">,</span>
+  <span class="text-zinc-300">filter</span><span class="text-zinc-500">:</span> <span class="text-zinc-500">{</span> <span class="text-zinc-300">op</span><span class="text-zinc-500">:</span> <span class="text-flint-400">"eq"</span><span class="text-zinc-500">,</span> <span class="text-zinc-300">field</span><span class="text-zinc-500">:</span> <span class="text-flint-400">"ticker"</span><span class="text-zinc-500">,</span> <span class="text-zinc-300">value</span><span class="text-zinc-500">:</span> <span class="text-flint-400">"AAPL"</span> <span class="text-zinc-500">},</span>
+  <span class="text-zinc-300">sort</span><span class="text-zinc-500">:</span> <span class="text-zinc-500">{</span> <span class="text-zinc-300">field</span><span class="text-zinc-500">:</span> <span class="text-flint-400">"close"</span><span class="text-zinc-500">,</span> <span class="text-zinc-300">descending</span><span class="text-zinc-500">:</span> <span class="text-purple-400">true</span> <span class="text-zinc-500">},</span>
+<span class="text-zinc-500">});</span></code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const btn = document.getElementById("copy-btn");
+  const cmd = document.getElementById("install-cmd");
+  const iconClip = document.getElementById("icon-clipboard");
+  const iconCheck = document.getElementById("icon-check");
+
+  btn?.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(cmd?.textContent ?? "npm install flintdb");
+      iconClip?.classList.add("hidden");
+      iconCheck?.classList.remove("hidden");
+      setTimeout(() => {
+        iconClip?.classList.remove("hidden");
+        iconCheck?.classList.add("hidden");
+      }, 2000);
+    } catch {
+      const range = document.createRange();
+      if (cmd) {
+        range.selectNodeContents(cmd);
+        window.getSelection()?.removeAllRanges();
+        window.getSelection()?.addRange(range);
+      }
+    }
+  });
+</script>

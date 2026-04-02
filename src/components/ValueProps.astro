@@ -1,0 +1,89 @@
+---
+const cards = [
+  {
+    headline: "No more schema headaches",
+    description:
+      "JSON in, JSON out. API responses, logs, nested objects \u2014 store them as-is. No migrations, no schema definitions, no ORM.",
+    icon: "braces",
+  },
+  {
+    headline: "No more `await` for local data",
+    description:
+      "Your data is right here on disk. FlintDB\u2019s native API is synchronous and completes in ~2 microseconds. No async overhead for local operations.",
+    icon: "bolt",
+  },
+  {
+    headline: "No more \u2018CSV it first\u2019 for analysis",
+    description:
+      "avg, stddev, EMA, percentile, correlation \u2014 computed inside the engine. Run analytics where your data lives. No Pandas, no ETL pipeline.",
+    icon: "chart",
+  },
+  {
+    headline: "No more separate vector DB",
+    description:
+      "Store embeddings alongside your documents. Cosine and L2 search built in. One database for data and vectors.",
+    icon: "vector",
+  },
+];
+---
+
+<section id="features" class="py-24 px-6">
+  <div class="max-w-5xl mx-auto">
+    <p class="text-center text-sm uppercase tracking-widest text-zinc-500 mb-14">
+      What you don't need anymore.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {cards.map((card) => (
+        <div class="relative rounded-xl border border-surface-600 bg-surface-800 p-6 overflow-hidden">
+          {/* Subtle amber gradient top border */}
+          <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-flint-500/60 to-transparent" aria-hidden="true"></div>
+
+          {/* Icon */}
+          <div class="mb-4 text-flint-400">
+            {card.icon === "braces" && (
+              <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M8 3H6a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2 2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h2" />
+                <path d="M16 3h2a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2 2 2 0 0 0-2 2v4a2 2 0 0 1-2 2h-2" />
+              </svg>
+            )}
+            {card.icon === "bolt" && (
+              <svg class="w-7 h-7" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+              </svg>
+            )}
+            {card.icon === "chart" && (
+              <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="12" width="4" height="9" rx="1" />
+                <rect x="10" y="6" width="4" height="15" rx="1" />
+                <rect x="17" y="3" width="4" height="18" rx="1" />
+              </svg>
+            )}
+            {card.icon === "vector" && (
+              <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M12 3v18" />
+                <path d="M3 12h18" />
+                <path d="M12 12l6-6" />
+                <circle cx="18" cy="6" r="2" fill="currentColor" />
+              </svg>
+            )}
+          </div>
+
+          {/* Headline */}
+          <h3
+            class="text-lg font-bold text-flint-400 mb-2"
+            set:html={card.headline
+              .replace(/`([^`]+)`/g, '<code class="bg-surface-700 px-1.5 py-0.5 rounded text-base font-mono">$1</code>')
+              .replace(/\u2018([^\u2019]+)\u2019/g, '\u2018$1\u2019')}
+          />
+
+          {/* Description */}
+          <p class="text-zinc-400 text-sm leading-relaxed font-sans">
+            {card.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

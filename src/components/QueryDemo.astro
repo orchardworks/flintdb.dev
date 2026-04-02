@@ -1,0 +1,158 @@
+---
+---
+
+<section class="px-6 py-20 lg:py-28">
+  <div class="mx-auto max-w-4xl">
+    <!-- Section heading -->
+    <div class="text-center">
+      <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+        Query is <span class="text-flint-500">Data</span>
+      </h2>
+      <p class="mt-4 text-lg text-surface-300">
+        Queries are plain JSON objects &mdash; no SQL strings, no query parser.
+      </p>
+    </div>
+
+    <!-- Tabs -->
+    <div class="mt-12" id="query-demo">
+      <!-- Tab bar -->
+      <div class="flex gap-1 overflow-x-auto border-b border-surface-700" role="tablist">
+        <button
+          type="button"
+          class="query-tab whitespace-nowrap px-4 py-2.5 text-sm font-medium transition border-b-2 border-flint-500 text-flint-400"
+          data-tab="basic-filter"
+          role="tab"
+          aria-selected="true"
+        >
+          Basic Filter
+        </button>
+        <button
+          type="button"
+          class="query-tab whitespace-nowrap px-4 py-2.5 text-sm font-medium transition border-b-2 border-transparent text-zinc-500 hover:text-zinc-300"
+          data-tab="groupby"
+          role="tab"
+          aria-selected="false"
+        >
+          GroupBy + Analytics
+        </button>
+        <button
+          type="button"
+          class="query-tab whitespace-nowrap px-4 py-2.5 text-sm font-medium transition border-b-2 border-transparent text-zinc-500 hover:text-zinc-300"
+          data-tab="window"
+          role="tab"
+          aria-selected="false"
+        >
+          Window Functions
+        </button>
+        <button
+          type="button"
+          class="query-tab whitespace-nowrap px-4 py-2.5 text-sm font-medium transition border-b-2 border-transparent text-zinc-500 hover:text-zinc-300"
+          data-tab="vector"
+          role="tab"
+          aria-selected="false"
+        >
+          Vector Search
+        </button>
+      </div>
+
+      <!-- Tab panels -->
+      <div class="mt-0">
+        <!-- Tab 1: Basic Filter -->
+        <div class="query-panel" id="panel-basic-filter">
+          <div class="rounded-b-xl bg-surface-800 p-6 overflow-x-auto">
+            <pre class="text-[13px] leading-relaxed font-mono sm:text-sm"><code><span class="text-surface-100">db</span><span class="text-surface-300">.</span><span class="text-flint-400">query</span><span class="text-surface-300">({</span>
+  <span class="text-sky-300">from</span><span class="text-surface-300">:</span> <span class="text-green-400">"prices"</span><span class="text-surface-300">,</span>
+  <span class="text-sky-300">filter</span><span class="text-surface-300">:</span> <span class="text-surface-300">{</span>
+    <span class="text-sky-300">op</span><span class="text-surface-300">:</span> <span class="text-green-400">"and"</span><span class="text-surface-300">,</span>
+    <span class="text-sky-300">filters</span><span class="text-surface-300">:</span> <span class="text-surface-300">[</span>
+      <span class="text-surface-300">{</span> <span class="text-sky-300">op</span><span class="text-surface-300">:</span> <span class="text-green-400">"eq"</span><span class="text-surface-300">,</span> <span class="text-sky-300">field</span><span class="text-surface-300">:</span> <span class="text-green-400">"ticker"</span><span class="text-surface-300">,</span> <span class="text-sky-300">value</span><span class="text-surface-300">:</span> <span class="text-green-400">"AAPL"</span> <span class="text-surface-300">},</span>
+      <span class="text-surface-300">{</span> <span class="text-sky-300">op</span><span class="text-surface-300">:</span> <span class="text-green-400">"gte"</span><span class="text-surface-300">,</span> <span class="text-sky-300">field</span><span class="text-surface-300">:</span> <span class="text-green-400">"date"</span><span class="text-surface-300">,</span> <span class="text-sky-300">value</span><span class="text-surface-300">:</span> <span class="text-green-400">"2025-01-01"</span> <span class="text-surface-300">},</span>
+    <span class="text-surface-300">],</span>
+  <span class="text-surface-300">},</span>
+  <span class="text-sky-300">sort</span><span class="text-surface-300">:</span> <span class="text-surface-300">{</span> <span class="text-sky-300">field</span><span class="text-surface-300">:</span> <span class="text-green-400">"date"</span><span class="text-surface-300">,</span> <span class="text-sky-300">descending</span><span class="text-surface-300">:</span> <span class="text-purple-400">true</span> <span class="text-surface-300">},</span>
+  <span class="text-sky-300">limit</span><span class="text-surface-300">:</span> <span class="text-cyan-400">100</span><span class="text-surface-300">,</span>
+<span class="text-surface-300">});</span></code></pre>
+          </div>
+        </div>
+
+        <!-- Tab 2: GroupBy + Analytics -->
+        <div class="query-panel hidden" id="panel-groupby">
+          <div class="rounded-b-xl bg-surface-800 p-6 overflow-x-auto">
+            <pre class="text-[13px] leading-relaxed font-mono sm:text-sm"><code><span class="text-surface-100">db</span><span class="text-surface-300">.</span><span class="text-flint-400">query</span><span class="text-surface-300">({</span>
+  <span class="text-sky-300">from</span><span class="text-surface-300">:</span> <span class="text-green-400">"prices"</span><span class="text-surface-300">,</span>
+  <span class="text-sky-300">group_by</span><span class="text-surface-300">:</span> <span class="text-surface-300">[</span><span class="text-green-400">"ticker"</span><span class="text-surface-300">],</span>
+  <span class="text-sky-300">select</span><span class="text-surface-300">:</span> <span class="text-surface-300">[</span>
+    <span class="text-surface-300">{</span> <span class="text-sky-300">name</span><span class="text-surface-300">:</span> <span class="text-green-400">"ticker"</span><span class="text-surface-300">,</span> <span class="text-sky-300">type</span><span class="text-surface-300">:</span> <span class="text-green-400">"col"</span><span class="text-surface-300">,</span> <span class="text-sky-300">field</span><span class="text-surface-300">:</span> <span class="text-green-400">"ticker"</span> <span class="text-surface-300">},</span>
+    <span class="text-surface-300">{</span> <span class="text-sky-300">name</span><span class="text-surface-300">:</span> <span class="text-green-400">"avg_close"</span><span class="text-surface-300">,</span> <span class="text-sky-300">type</span><span class="text-surface-300">:</span> <span class="text-green-400">"fn"</span><span class="text-surface-300">,</span> <span class="text-sky-300">func</span><span class="text-surface-300">:</span> <span class="text-green-400">"avg"</span><span class="text-surface-300">,</span> <span class="text-sky-300">field</span><span class="text-surface-300">:</span> <span class="text-green-400">"close"</span> <span class="text-surface-300">},</span>
+    <span class="text-surface-300">{</span> <span class="text-sky-300">name</span><span class="text-surface-300">:</span> <span class="text-green-400">"volatility"</span><span class="text-surface-300">,</span> <span class="text-sky-300">type</span><span class="text-surface-300">:</span> <span class="text-green-400">"fn"</span><span class="text-surface-300">,</span> <span class="text-sky-300">func</span><span class="text-surface-300">:</span> <span class="text-green-400">"stddev"</span><span class="text-surface-300">,</span> <span class="text-sky-300">field</span><span class="text-surface-300">:</span> <span class="text-green-400">"close"</span> <span class="text-surface-300">},</span>
+    <span class="text-surface-300">{</span> <span class="text-sky-300">name</span><span class="text-surface-300">:</span> <span class="text-green-400">"max_volume"</span><span class="text-surface-300">,</span> <span class="text-sky-300">type</span><span class="text-surface-300">:</span> <span class="text-green-400">"fn"</span><span class="text-surface-300">,</span> <span class="text-sky-300">func</span><span class="text-surface-300">:</span> <span class="text-green-400">"max"</span><span class="text-surface-300">,</span> <span class="text-sky-300">field</span><span class="text-surface-300">:</span> <span class="text-green-400">"volume"</span> <span class="text-surface-300">},</span>
+  <span class="text-surface-300">],</span>
+  <span class="text-sky-300">sort</span><span class="text-surface-300">:</span> <span class="text-surface-300">{</span> <span class="text-sky-300">field</span><span class="text-surface-300">:</span> <span class="text-green-400">"avg_close"</span><span class="text-surface-300">,</span> <span class="text-sky-300">descending</span><span class="text-surface-300">:</span> <span class="text-purple-400">true</span> <span class="text-surface-300">},</span>
+<span class="text-surface-300">});</span></code></pre>
+          </div>
+        </div>
+
+        <!-- Tab 3: Window Functions -->
+        <div class="query-panel hidden" id="panel-window">
+          <div class="rounded-b-xl bg-surface-800 p-6 overflow-x-auto">
+            <pre class="text-[13px] leading-relaxed font-mono sm:text-sm"><code><span class="text-surface-100">db</span><span class="text-surface-300">.</span><span class="text-flint-400">query</span><span class="text-surface-300">({</span>
+  <span class="text-sky-300">from</span><span class="text-surface-300">:</span> <span class="text-green-400">"prices"</span><span class="text-surface-300">,</span>
+  <span class="text-sky-300">filter</span><span class="text-surface-300">:</span> <span class="text-surface-300">{</span> <span class="text-sky-300">op</span><span class="text-surface-300">:</span> <span class="text-green-400">"eq"</span><span class="text-surface-300">,</span> <span class="text-sky-300">field</span><span class="text-surface-300">:</span> <span class="text-green-400">"ticker"</span><span class="text-surface-300">,</span> <span class="text-sky-300">value</span><span class="text-surface-300">:</span> <span class="text-green-400">"AAPL"</span> <span class="text-surface-300">},</span>
+  <span class="text-sky-300">window</span><span class="text-surface-300">:</span> <span class="text-surface-300">{</span> <span class="text-sky-300">order_by</span><span class="text-surface-300">:</span> <span class="text-green-400">"date"</span><span class="text-surface-300">,</span> <span class="text-sky-300">rows</span><span class="text-surface-300">:</span> <span class="text-cyan-400">20</span> <span class="text-surface-300">},</span>
+  <span class="text-sky-300">select</span><span class="text-surface-300">:</span> <span class="text-surface-300">[</span>
+    <span class="text-surface-300">{</span> <span class="text-sky-300">name</span><span class="text-surface-300">:</span> <span class="text-green-400">"date"</span><span class="text-surface-300">,</span> <span class="text-sky-300">type</span><span class="text-surface-300">:</span> <span class="text-green-400">"col"</span><span class="text-surface-300">,</span> <span class="text-sky-300">field</span><span class="text-surface-300">:</span> <span class="text-green-400">"date"</span> <span class="text-surface-300">},</span>
+    <span class="text-surface-300">{</span> <span class="text-sky-300">name</span><span class="text-surface-300">:</span> <span class="text-green-400">"close"</span><span class="text-surface-300">,</span> <span class="text-sky-300">type</span><span class="text-surface-300">:</span> <span class="text-green-400">"col"</span><span class="text-surface-300">,</span> <span class="text-sky-300">field</span><span class="text-surface-300">:</span> <span class="text-green-400">"close"</span> <span class="text-surface-300">},</span>
+    <span class="text-surface-300">{</span> <span class="text-sky-300">name</span><span class="text-surface-300">:</span> <span class="text-green-400">"sma_20"</span><span class="text-surface-300">,</span> <span class="text-sky-300">type</span><span class="text-surface-300">:</span> <span class="text-green-400">"fn"</span><span class="text-surface-300">,</span> <span class="text-sky-300">func</span><span class="text-surface-300">:</span> <span class="text-green-400">"avg"</span><span class="text-surface-300">,</span> <span class="text-sky-300">field</span><span class="text-surface-300">:</span> <span class="text-green-400">"close"</span> <span class="text-surface-300">},</span>
+    <span class="text-surface-300">{</span> <span class="text-sky-300">name</span><span class="text-surface-300">:</span> <span class="text-green-400">"ema_20"</span><span class="text-surface-300">,</span> <span class="text-sky-300">type</span><span class="text-surface-300">:</span> <span class="text-green-400">"fn"</span><span class="text-surface-300">,</span> <span class="text-sky-300">func</span><span class="text-surface-300">:</span> <span class="text-green-400">"ema"</span><span class="text-surface-300">,</span> <span class="text-sky-300">field</span><span class="text-surface-300">:</span> <span class="text-green-400">"close"</span> <span class="text-surface-300">},</span>
+    <span class="text-surface-300">{</span> <span class="text-sky-300">name</span><span class="text-surface-300">:</span> <span class="text-green-400">"vol"</span><span class="text-surface-300">,</span> <span class="text-sky-300">type</span><span class="text-surface-300">:</span> <span class="text-green-400">"fn"</span><span class="text-surface-300">,</span> <span class="text-sky-300">func</span><span class="text-surface-300">:</span> <span class="text-green-400">"stddev"</span><span class="text-surface-300">,</span> <span class="text-sky-300">field</span><span class="text-surface-300">:</span> <span class="text-green-400">"close"</span> <span class="text-surface-300">},</span>
+  <span class="text-surface-300">],</span>
+<span class="text-surface-300">});</span></code></pre>
+          </div>
+        </div>
+
+        <!-- Tab 4: Vector Search -->
+        <div class="query-panel hidden" id="panel-vector">
+          <div class="rounded-b-xl bg-surface-800 p-6 overflow-x-auto">
+            <pre class="text-[13px] leading-relaxed font-mono sm:text-sm"><code><span class="text-purple-400">const</span> <span class="text-surface-100">results</span> <span class="text-surface-300">=</span> <span class="text-surface-100">db</span><span class="text-surface-300">.</span><span class="text-flint-400">nearVector</span><span class="text-surface-300">(</span>
+  <span class="text-green-400">"articles"</span><span class="text-surface-300">,</span>
+  <span class="text-green-400">"embedding"</span><span class="text-surface-300">,</span>
+  <span class="text-surface-100">queryVector</span><span class="text-surface-300">,</span>
+  <span class="text-surface-300">{</span>
+    <span class="text-sky-300">topK</span><span class="text-surface-300">:</span> <span class="text-cyan-400">10</span><span class="text-surface-300">,</span>
+    <span class="text-sky-300">metric</span><span class="text-surface-300">:</span> <span class="text-green-400">"cosine"</span><span class="text-surface-300">,</span>
+    <span class="text-sky-300">filter</span><span class="text-surface-300">:</span> <span class="text-surface-300">{</span> <span class="text-sky-300">op</span><span class="text-surface-300">:</span> <span class="text-green-400">"eq"</span><span class="text-surface-300">,</span> <span class="text-sky-300">field</span><span class="text-surface-300">:</span> <span class="text-green-400">"category"</span><span class="text-surface-300">,</span> <span class="text-sky-300">value</span><span class="text-surface-300">:</span> <span class="text-green-400">"tech"</span> <span class="text-surface-300">},</span>
+  <span class="text-surface-300">}</span>
+<span class="text-surface-300">);</span></code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const tabs = document.querySelectorAll<HTMLButtonElement>(".query-tab");
+  const panels = document.querySelectorAll<HTMLElement>(".query-panel");
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      const target = tab.dataset.tab;
+
+      // Update tab styles
+      tabs.forEach((t) => {
+        t.classList.remove("border-flint-500", "text-flint-400");
+        t.classList.add("border-transparent", "text-zinc-500");
+        t.setAttribute("aria-selected", "false");
+      });
+      tab.classList.add("border-flint-500", "text-flint-400");
+      tab.classList.remove("border-transparent", "text-zinc-500");
+      tab.setAttribute("aria-selected", "true");
+
+      // Show/hide panels
+      panels.forEach((p) => {
+        p.classList.add("hidden");
+      });
+      document.getElementById(`panel-${target}`)?.classList.remove("hidden");
+    });
+  });
+</script>

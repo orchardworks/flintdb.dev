@@ -1,0 +1,65 @@
+---
+---
+
+<section class="px-6 py-20 lg:py-28">
+  <div class="mx-auto max-w-5xl">
+    <!-- Section heading -->
+    <div class="text-center">
+      <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+        How FlintDB <span class="text-flint-500">compares</span>
+      </h2>
+    </div>
+
+    <!-- Table wrapper -->
+    <div class="mt-12 overflow-x-auto rounded-xl border border-surface-600 bg-surface-800">
+      <table class="w-full min-w-[640px] text-left text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 bg-surface-900/50">
+            <th class="px-5 py-4 font-medium text-surface-300">Feature</th>
+            <th class="px-5 py-4 font-medium text-flint-400">FlintDB</th>
+            <th class="px-5 py-4 font-medium text-surface-300">SQLite</th>
+            <th class="px-5 py-4 font-medium text-surface-300">DuckDB</th>
+            <th class="px-5 py-4 font-medium text-surface-300">MongoDB</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-surface-700">
+          <tr>
+            <td class="px-5 py-4 font-medium text-surface-200">Setup</td>
+            <td class="px-5 py-4 text-flint-400 font-mono text-xs">npm install</td>
+            <td class="px-5 py-4 text-surface-400">Native addon or binary</td>
+            <td class="px-5 py-4 text-surface-400">npm install (WASM)</td>
+            <td class="px-5 py-4 text-surface-400">Separate server</td>
+          </tr>
+          <tr>
+            <td class="px-5 py-4 font-medium text-surface-200">Query Language</td>
+            <td class="px-5 py-4 text-flint-400">JSON objects</td>
+            <td class="px-5 py-4 text-surface-400">SQL strings</td>
+            <td class="px-5 py-4 text-surface-400">SQL strings</td>
+            <td class="px-5 py-4 text-surface-400">JSON (server required)</td>
+          </tr>
+          <tr>
+            <td class="px-5 py-4 font-medium text-surface-200">Built-in Analytics</td>
+            <td class="px-5 py-4 text-flint-400">stddev, EMA, percentile, correlation...</td>
+            <td class="px-5 py-4 text-surface-400">Manual SQL</td>
+            <td class="px-5 py-4 text-surface-400">Rich SQL analytics</td>
+            <td class="px-5 py-4 text-surface-400">Aggregation pipeline</td>
+          </tr>
+          <tr>
+            <td class="px-5 py-4 font-medium text-surface-200">Vector Search</td>
+            <td class="px-5 py-4 text-flint-400">Built-in (cosine, L2)</td>
+            <td class="px-5 py-4 text-surface-400">Extension needed</td>
+            <td class="px-5 py-4 text-surface-400">Extension needed</td>
+            <td class="px-5 py-4 text-surface-400">Atlas Search (cloud)</td>
+          </tr>
+          <tr>
+            <td class="px-5 py-4 font-medium text-surface-200">Architecture</td>
+            <td class="px-5 py-4 text-flint-400">In-process, sync</td>
+            <td class="px-5 py-4 text-surface-400">In-process</td>
+            <td class="px-5 py-4 text-surface-400">In-process</td>
+            <td class="px-5 py-4 text-surface-400">Client-server</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
